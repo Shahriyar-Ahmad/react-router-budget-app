@@ -1,26 +1,39 @@
+// rrd
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dasbord, { dasbordLoader } from "./Pages/Dasbord";
+import Dasbord, { dasbordLoader, dasbordAction } from "./Pages/Dasbord";
+
+// Library for notification
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// components
 import Error from "./Pages/Error";
-import Main from "./Layouts/Main";
+import Main, { mainLoader } from "./Layouts/Main";
+
+// actions
+import {logoutActions} from "./actions/logout";
+
+
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Main />,
-      loader: dasbordLoader,
+      loader: mainLoader,
       errorElement: <Error />,
       children: [
         {
         index: true,
         element: <Dasbord/>,
         loader: dasbordLoader,
+        action: dasbordAction,
         errorElement: <Error/>
-      },
+       },
       {
         path: "logout",
-        element: <b>logout</b>,
+        action: logoutActions,
       },
       {
         path: "about",
@@ -38,6 +51,7 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer/>
     </>
   );
 }

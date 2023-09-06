@@ -1,47 +1,40 @@
-// rrd 
-import React from 'react'
-import { Form, NavLink } from 'react-router-dom'
+// rrd
+import React from "react";
+import { Form, NavLink } from "react-router-dom";
 
-// iCONS 
-import { TrashIcon } from '@heroicons/react/24/solid'
+// iCONS
+import { TrashIcon } from "@heroicons/react/24/solid";
 
 // assets
-import LogoMark from '../assets/logomark.svg';
+import LogoMark from "../assets/logomark.svg";
 
-
-function Nabar({userName}) {
-  return ( 
+function Nabar({ userName }) {
+  return (
     <nav>
-     <NavLink 
-     to={'/'}
-     aria-label='Home'
-     >
-     <img src={LogoMark} alt='logomark'/>
-     <span>Home</span>
-     </NavLink>
-     {
-        userName && (
+      <NavLink to={"/"} aria-label="Home">
+        <img src={LogoMark} alt="logomark" />
+        <span>Home</span>
+      </NavLink>
+      {userName && (
         <Form
-        method='post'
-        action='/logout'
-        onSubmit={(e)=>{
-            if(!confirm('Delete User and Date')){
-                e.preventDefault();
-              }     
-            }}
+          method="post"
+          action="/logout"
+          onSubmit={(e) => {
+            if (!confirm("Delete User and Date")) {
+              e.preventDefault();
+            }
+          }}
         >
-         <button 
-       className='btn btn--warning'
-       type='submit'>
-      <span>Delete User 
-        <TrashIcon width={30}/>
-      </span>
-       </button>
+          <button className="btn btn--warning" type="submit">
+            <span>
+              Delete User
+              <TrashIcon width={30} />
+            </span>
+          </button>
         </Form>
-        )
-     }
-    </nav> 
-  )
+      )}
+    </nav>
+  );
 }
 
-export default Nabar
+export default Nabar;
