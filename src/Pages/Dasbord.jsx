@@ -52,7 +52,7 @@ function Dasbord() {
       {userName ? (
         <div className="dashboard">
           <h1>
-            Welcom back, <span className="accent">{userName}</span>
+            Welcome back, <span className="accent">{userName}</span>
           </h1>
           <div className="grid-sm">
             {budgets ? <b>budgets</b> : <p>no</p>}
