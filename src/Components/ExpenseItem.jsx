@@ -6,7 +6,7 @@ import { useFetcher, Link} from "react-router-dom";
 // helper
 import { formatCurrency, formateDatetoLocaleString , getAllMatcingItems } from '../helper'
 
-function ExpenseItem({expense}) {
+function ExpenseItem({expense, showBudget}) {
   const fetcher = useFetcher();
       const {id,name, amount, createdAt ,budgetId  } = expense;
     const budget = getAllMatcingItems({
@@ -20,15 +20,18 @@ function ExpenseItem({expense}) {
       <td>{name}</td>
       <td>{formatCurrency(amount)}</td>
       <td>{formateDatetoLocaleString(createdAt)}</td>
-     <td>
-      <Link 
-      style={{
-        "--accent": budget.color
-      }}
-      to={`/budget/${budget.id}`}>
-        {budget.name}
-        </Link>
-     </td>
+      {
+        showBudget&&<td>
+        <Link 
+        style={{
+          "--accent": budget.color
+        }}
+        to={`/budget/${budgetId}`}>
+          {budget.name}
+          </Link>
+       </td> 
+      }
+  
      <td>
       <fetcher.Form
       method='post'>

@@ -12,10 +12,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Error from "./Pages/Error";
 import ExpensesPage, {expensesLoader, expensesAction} from "./Pages/ExpensesPage";
 import Main, { mainLoader } from "./Layouts/Main";
-import BudgetPage, { budgetLoader } from "./Pages/budgetPage";
+import BudgetPage, { budgetAction, budgetLoader } from "./Pages/budgetPage";
 
 // actions
 import { logoutActions } from "./actions/logout";
+import { deleteBudget } from "./actions/deleteBudget";
 
 
 function App() {
@@ -38,12 +39,20 @@ function App() {
           element: <ExpensesPage />,
           action: expensesAction,
           loader: expensesLoader,
+          errorElement: <Error />,
         },
         {
           path: "budget/:id",
           element: <BudgetPage />,
-          // action: expensesAction,
+          action:  budgetAction,
           loader: budgetLoader,
+          errorElement: <Error />, 
+          children:[
+            {
+              path: "delete",
+              action:  deleteBudget,
+            }
+          ]
         },
         {
           path: "logout",
