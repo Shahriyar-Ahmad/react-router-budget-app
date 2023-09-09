@@ -21,7 +21,7 @@ function Nabar({ userName }) {
           method="post"
           action="/logout"
           onSubmit={(e) => {
-            if (!confirm("Delete User and Date")) {
+            if (!confirm("Delete User and All Data")) {
               e.preventDefault();
             }
           }}

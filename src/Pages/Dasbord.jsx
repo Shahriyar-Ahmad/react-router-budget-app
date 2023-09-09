@@ -1,8 +1,9 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+//  rrd
+import { useLoaderData, Link} from "react-router-dom";
 
 // helper
-import { createBudget, createExpense, fetchData, waite } from "../helper";
+import { createBudget, createExpense, deletItem, fetchData, waite } from "../helper";
 
 // Notification Labrray
 import { toast } from "react-toastify";
@@ -12,12 +13,14 @@ import Intro from "../Components/Intro";
 import AddBudgetForm from "../Components/AddBudgetForm";
 import AddExpenseForm from "../Components/AddExpenseForm";
 import BudgetItem from "../Components/BudgetItem";
+import Table from "../Components/Table";
 
 // Loader
 export const dasbordLoader = () => {
   const userName = fetchData("userName");
   const budgets = fetchData("budgets");
-  return { userName, budgets };
+  const expenses = fetchData("expenses");
+  return { userName, budgets , expenses };
 };
 // Actions
 export async function dasbordAction({ request }) {
@@ -58,10 +61,23 @@ export async function dasbordAction({ request }) {
       throw new Error("There was a problem creating your expense.");
     }
   }
+  if (_action === "deleteExpense") {
+    try {
+        deletItem({
+          key: "expenses",
+          id: values.expenseId,
+        })
+      return toast.success(
+        `Expense delete successfully.`
+      );
+    } catch (e) {
+      throw new Error("There was a problem creating your expense.");
+    }
+  }
 }
 
 function Dasbord() {
-  const { userName, budgets } = useLoaderData();
+  const { userName, budgets , expenses } = useLoaderData();
   return (
     <>
       {/* Ceck userName Exit , if not redirect to lo */}
@@ -76,13 +92,36 @@ function Dasbord() {
                 <div className="flex-lg">
                   <AddBudgetForm />
                   <AddExpenseForm budgets={budgets} />
+                  </div>
                   <h2>Existing Budgets</h2>
                   <div className="budgets">
                     {budgets.map((budget) => (
                       <BudgetItem key={budget.id} budget={budget} />
                     ))}
                   </div>
-                </div>
+                  {
+                    expenses && expenses.length > 
+                    0 &&(
+                      <div className="grid-md">
+                        <h2>Recent Expenses</h2>
+                        <Table expenses={expenses
+                          .sort((a,b)=>
+                          b.createdAt - a.createdAt)
+                          .slice(0,8)
+                        }/>
+                        {
+                        expenses && expenses.length > 
+                    8 &&(
+                      <Link
+                       to="expenses"
+                       className="btn btn--dark">
+                         View all expenses
+                        </Link>
+                    )
+                         }
+                      </div>
+                    )
+                  }
               </div>
             ) : (
               //

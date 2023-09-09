@@ -2,9 +2,16 @@
 export function fetchData(key) {
   return JSON.parse(localStorage.getItem(key));
 }
+
+export const getAllMatcingItems = ({catagory, key, value}) =>{
+   const data = fetchData(catagory)??[];
+   return data.filter((item)=>item[key]=== value);
+
+}
+
 // submitting loading time
 export const waite =()=> new Promise(res=>
-  setTimeout(res, Math.random() * 2000))
+  setTimeout(res, Math.random() * 800))
 
 // generate color 
 const generateRandomColor =()=>{
@@ -46,14 +53,22 @@ JSON.stringify([...exitingExpenses, newItem]))
 export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);
 };
-// 
+
+// delete expense
+export const deletItem = ({key, id})=>{
+  const exitingData = fetchData(key);
+  if(id){
+    const newData = exitingData.filter((item)=> item.id !==id);
+    return localStorage.setItem(key, JSON.stringify(newData));
+  }
+  return localStorage.removeItem(key);
+}
+// Total Expenses
 export const calculateSpentbyBudget = (budgetId) => {
   // expenses exist, then pass them into an array
   const expenses = fetchData("expenses") ?? [];
 
   const budgetSpent = expenses.reduce((acc, expense) => {
-    console.log(expense.budgetId);
-    console.log(budgetId)
     // check if expense.budgetId === budgetId I passed in
     if (expense.budgetId !== budgetId) return acc;
 
@@ -62,6 +77,21 @@ export const calculateSpentbyBudget = (budgetId) => {
   }, 0);
   return budgetSpent;
 };
+
+// FORMATE
+
+// Formate date
+
+export const formateDatetoLocaleString= (dte) =>
+  new Date(dte).toLocaleDateString();
+
+// Formate per%
+export const formatePercentage=(amt)=>{
+   return amt.toLocaleString(undefined, {
+    style:  "percent",
+    minimumFractionDigits: 0
+   }) 
+}
 
 // Format currency
 export const formatCurrency = (amt) => {
