@@ -104,6 +104,7 @@ function Dasbord() {
                     0 &&(
                       <div className="grid-md">
                         <h2>Recent Expenses</h2>
+                        {/* Sort expenses in tablel by time at that time created */}
                         <Table expenses={expenses
                           .sort((a,b)=>
                           b.createdAt - a.createdAt)
