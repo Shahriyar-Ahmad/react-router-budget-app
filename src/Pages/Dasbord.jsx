@@ -124,7 +124,6 @@ function Dasbord() {
                   }
               </div>
             ) : (
-              //
               <div className="grid-sm">
                 <p>
                   Personal budget is secret to financial freedom. Start Your

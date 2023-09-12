@@ -54,6 +54,7 @@ export const deleteItem = ({ key }) => {
   return localStorage.removeItem(key);
 };
 
+
 // delete expense
 export const deletItem = ({key, id})=>{
   const exitingData = fetchData(key);
@@ -69,7 +70,7 @@ export const calculateSpentbyBudget = (budgetId) => {
   const expenses = fetchData("expenses") ?? [];
 
   const budgetSpent = expenses.reduce((acc, expense) => {
-    // check if expense.budgetId === budgetId I passed in
+    // check if expense.budgetId === budget.id I passed in
     if (expense.budgetId !== budgetId) return acc;
 
     // add the current amount to my ltotal

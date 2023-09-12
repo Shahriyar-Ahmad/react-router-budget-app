@@ -1,7 +1,7 @@
 // rrd
 import { redirect } from "react-router-dom";
 
-// ealper
+// healper
 import { deleteItem } from "../helper";
 
 // import notification
@@ -20,7 +20,7 @@ export async function logoutActions(){
     deleteItem({
         key: "expenses"
     })
-    toast.success("Your deleted account!")
+    toast.success("Your deleted account.")
     // return redirect
     return redirect("/")
 }

@@ -3,7 +3,7 @@ import React from 'react'
 // Components
 import ExpenseItem from './ExpenseItem'
 
-function Table({expenses, showBudget= true}) {
+function Table({expenses, showBudget = true}) {
   return (
     <div className='table'>
       <table>

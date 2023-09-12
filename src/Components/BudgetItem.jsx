@@ -33,18 +33,21 @@ function BudgetItem({ budget, showDelete = false }) {
       {showDelete ? (
         <div className="flex-sm">
           <Form
-           method="post"
-           action="delete"
-           onSubmit={(e)=>{
-          if(!confirm("Are you sure you want to permanently delete this budget")){
-             e.preventDefault();
-          }}
-        }
+            method="post"
+            action="delete"
+            onSubmit={(e) => {
+              if (
+                !confirm(
+                  "Are you sure you want to permanently delete this budget"
+                )
+              ) {
+                e.preventDefault();
+              }
+            }}
           >
-          <button 
-          type="submit" 
-          className="btn"
-          >Delete Budget</button>
+            <button type="submit" className="btn">
+              Delete Budget
+            </button>
           </Form>
         </div>
       ) : (

@@ -1,8 +1,9 @@
-// rrd
+// React import
 import * as React from "react";
 
+// React Router 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dasbord, { dasbordLoader, dasbordAction } from "./Pages/Dasbord";
+
 
 // Library for notification
 import { ToastContainer } from "react-toastify";
@@ -10,11 +11,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Pages 
 import Error from "./Pages/Error";
+import Dasbord, { dasbordLoader, dasbordAction } from "./Pages/Dasbord";
 import ExpensesPage, {expensesLoader, expensesAction} from "./Pages/ExpensesPage";
 import Main, { mainLoader } from "./Layouts/Main";
 import BudgetPage, { budgetAction, budgetLoader } from "./Pages/budgetPage";
 
-// actions
+// Actions
 import { logoutActions } from "./actions/logout";
 import { deleteBudget } from "./actions/deleteBudget";
 
@@ -58,18 +60,8 @@ function App() {
           path: "logout",
           action: logoutActions,
         },
-        {
-          path: "about",
-          element: <b>about</b>,
-        },
       ],
-    },
-    //   Second Way to pass error mes to unknow route
-    // {
-    //   path: "/*",
-    //   element: <b>Not Found</b>,
-
-    // }
+    }
   ]);
   return (
     <>
