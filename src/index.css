@@ -8,7 +8,11 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
+.error-mes{
+  text-align: right;
+  font-size: medium;
+  color: red;
+}
 img {
   display: block;
   max-width: 100%;

@@ -29,7 +29,7 @@ function Nabar({ userName }) {
           <button className="btn btn--warning" type="submit">
             <span>
               Delete User
-              <TrashIcon width={30} />
+              <TrashIcon width={25} />
             </span>
           </button>
         </Form>

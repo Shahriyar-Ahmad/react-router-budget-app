@@ -17,7 +17,7 @@ function ExpenseItem({ expense, showBudget }) {
     key: "id",
     value: expense.budgetId,
   })[0];
-  console.log(budget);
+  // console.log(budget);
   return (
     <>
       <td>{expense.name}</td>

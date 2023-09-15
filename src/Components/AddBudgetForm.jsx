@@ -1,5 +1,5 @@
 // rrd
-import React from "react";
+import React, { useState } from "react";
 import {  useFetcher } from "react-router-dom";
 
 // Icons library
@@ -14,6 +14,22 @@ function AddBudgetForm() {
 
   const formRef = useRef();
   const focusRef = useRef();
+
+  const [error, setError] = useState("")
+  // Validation fun
+  function typeValidate(e){
+    const inputValue = e.target.value;
+    if(isNaN(inputValue) === false){
+      setError("⚠️ Invalid Input, Fil Only Text!");
+      if(inputValue.length === 0){
+       setError("")
+      }
+    }
+    else if(isNaN(inputValue)){
+      setError("")
+    }
+    return true;
+  }
   useEffect(() => {
     if (!isSubmiting) {
       formRef.current.reset();
@@ -29,11 +45,13 @@ function AddBudgetForm() {
           <input
             type="text"
             name="newBudget"
+            onChange={typeValidate}
             id="newBudget"
             placeholder="e.g., Groceries"
             ref={focusRef}
             required
           />
+          <span className="error-mes">{error}</span>
         </div>
         <div className="grid-xs">
           <label htmlFor="newBudgetAmount">Budget Amount</label>
@@ -48,8 +66,8 @@ function AddBudgetForm() {
           />
         </div>
         <input type="hidden" name="_action" value="createBudget" />
-        <button type="submit" disabled={isSubmiting} className="btn btn--dark">
-          {isSubmiting ? (
+        <button type="submit" disabled={ isSubmiting } className="btn btn--dark">
+          {isSubmiting? (
             <span>Submitting...</span>
           ) : (
             <>

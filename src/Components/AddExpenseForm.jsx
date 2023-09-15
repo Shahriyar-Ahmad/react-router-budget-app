@@ -1,5 +1,5 @@
 // React imports
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // Icons library
 import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
@@ -13,7 +13,21 @@ function AddExpenseForm({ budgets }) {
 
   const formRef = useRef();
   const focusRef = useRef();
-
+  const [error, setError] = useState("");
+  // Validation fun
+  function typeValidate(e){
+    const inputValue = e.target.value;
+    if(isNaN(inputValue) === false){
+      setError("⚠️ Invalid Input, Fil Only Text!");
+      if(inputValue.length === 0){
+       setError("")
+      }
+    }
+    else if(isNaN(inputValue)){
+      setError("")
+    }
+    return true;
+  }
   // useEffect for submitting
   useEffect(() => {
     if (!isSubmiting) {
@@ -40,10 +54,12 @@ function AddExpenseForm({ budgets }) {
               type="text"
               name="newExpense"
               id="newExpense"
+              onChange={typeValidate}
               ref={focusRef}
               placeholder="e.g., Coffee"
               required
             />
+           <span className="error-mes">{error}</span>
           </div>
           <div className="grid-xs">
             <label htmlFor="newExpenseAmount">Amount</label>
